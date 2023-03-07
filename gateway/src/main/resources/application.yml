@@ -1,0 +1,79 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+
+        - id: power plant
+          uri: http://localhost:8081
+          predicates:
+            - Path=/powerGenerations/**, 
+        - id: power plant_websocket
+          uri: http://localhost:7081
+          predicates:
+            - Path=/rsocket/powerPlants
+
+        - id: metering billing
+          uri: http://localhost:8082
+          predicates:
+            - Path=/seps/**, 
+        - id: metering billing_websocket
+          uri: http://localhost:7082
+          predicates:
+            - Path=/rsocket/meteringBillings
+
+        
+        - id: frontend
+          uri: http://localhost:8080
+          predicates:
+            - Path=/**
+
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: power plant
+          uri: http://powerPlant:8080
+          predicates:
+            - Path=/powerGenerations/**, 
+        - id: metering billing
+          uri: http://meteringBilling:8080
+          predicates:
+            - Path=/seps/**, 
+        - id: frontend
+          uri: http://frontend:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
