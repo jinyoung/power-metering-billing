@@ -48,7 +48,7 @@
                     @click="save"
                     v-else
             >
-                Calculate
+                Save
             </v-btn>
             <v-btn
                     color="deep-purple lighten-2"
@@ -69,6 +69,20 @@
         </v-card-actions>
         <v-card-actions>
             <v-spacer></v-spacer>
+            <v-btn
+                    v-if="!editMode"
+                    color="deep-purple lighten-2"
+                    text
+                    @click="openCalculate"
+            >
+                Calculate
+            </v-btn>
+            <v-dialog v-model="calculateDiagram" width="500">
+                <CalculateCommand
+                        @closeDialog="closeCalculate"
+                        @calculate="calculate"
+                ></CalculateCommand>
+            </v-dialog>
         </v-card-actions>
 
         <v-snackbar
@@ -111,6 +125,7 @@
                 timeout: 5000,
                 text: ''
             },
+            calculateDiagram: false,
         }),
         created(){
             if(this.isNew) return;
@@ -274,6 +289,32 @@
             },
             change(){
                 this.$emit('input', this.value);
+            },
+            async calculate(params) {
+                try {
+                    if(!this.offline) {
+                        var temp = await axios.put(axios.fixUrl(this.value._links['calculate'].href), params)
+                        for(var k in temp.data) {
+                            this.value[k]=temp.data[k];
+                        }
+                    }
+
+                    this.editMode = false;
+                    this.closeCalculate();
+                } catch(e) {
+                    this.snackbar.status = true
+                    if(e.response && e.response.data.message) {
+                        this.snackbar.text = e.response.data.message
+                    } else {
+                        this.snackbar.text = e
+                    }
+                }
+            },
+            openCalculate() {
+                this.calculateDiagram = true;
+            },
+            closeCalculate() {
+                this.calculateDiagram = false;
             },
 
 

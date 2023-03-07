@@ -37,23 +37,20 @@ public class SepController {
         this.queryGateway = queryGateway;
     }
 
-    @RequestMapping(value = "/seps", method = RequestMethod.POST)
+    @RequestMapping(
+        value = "/seps/{id}/calculate",
+        method = RequestMethod.PUT,
+        produces = "application/json;charset=UTF-8"
+    )
     public CompletableFuture calculate(
+        @PathVariable("id") String id,
         @RequestBody CalculateCommand calculateCommand
     ) throws Exception {
         System.out.println("##### /sep/calculate  called #####");
 
+        calculateCommand.setId(id);
         // send command
-        return commandGateway
-            .send(calculateCommand)
-            .thenApply(id -> {
-                SepAggregate resource = new SepAggregate();
-                BeanUtils.copyProperties(calculateCommand, resource);
-
-                resource.setId((String) id);
-
-                return new ResponseEntity<>(hateoas(resource), HttpStatus.OK);
-            });
+        return commandGateway.send(calculateCommand);
     }
 
     @Autowired
@@ -73,6 +70,12 @@ public class SepController {
         EntityModel<SepAggregate> model = EntityModel.of(resource);
 
         model.add(Link.of("/seps/" + resource.getId()).withSelfRel());
+
+        model.add(
+            Link
+                .of("/seps/" + resource.getId() + "/calculate")
+                .withRel("calculate")
+        );
 
         model.add(
             Link.of("/seps/" + resource.getId() + "/events").withRel("events")
