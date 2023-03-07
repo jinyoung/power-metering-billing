@@ -34,16 +34,27 @@ public class SepAggregate {
     public SepAggregate() {}
 
     @CommandHandler
-    public SepAggregate(CalculateCommand command) {}
+    public void handle(CalculateCommand command) {
+        MeasureCalculatedEvent event = new MeasureCalculatedEvent();
+        BeanUtils.copyProperties(command, event);
+
+        apply(event);
+    }
 
     //<<< Etc / ID Generation
     private String createUUID() {
         return UUID.randomUUID().toString();
     }
+
     //>>> Etc / ID Generation
 
     //<<< EDA / Event Sourcing
 
+    @EventSourcingHandler
+    public void on(MeasureCalculatedEvent event) {
+        //TODO: business logic here
+
+    }
     //>>> EDA / Event Sourcing
 
 }

@@ -6,6 +6,10 @@
         </v-card-title>
 
         <v-card-text>
+            <String label="SubscriberId" v-model="value.subscriberId" :editMode="editMode"/>
+            <String label="PlatId" v-model="value.platId" :editMode="editMode"/>
+            <String label="GeneratorType" v-model="value.generatorType" :editMode="editMode"/>
+            <Number label="GeneratedAmount" v-model="value.generatedAmount" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>
@@ -41,6 +45,10 @@
             value: {},
         }),
         created() {
+            this.value.subscriberId = '';
+            this.value.platId = '';
+            this.value.generatorType = '';
+            this.value.generatedAmount = 0;
         },
         watch: {
         },
