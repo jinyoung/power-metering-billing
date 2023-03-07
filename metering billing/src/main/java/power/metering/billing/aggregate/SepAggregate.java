@@ -13,7 +13,7 @@ import org.axonframework.spring.stereotype.Aggregate;
 import org.springframework.beans.BeanUtils;
 import power.metering.billing.command.*;
 import power.metering.billing.event.*;
-import power.metering.billing.query.*;
+//import power.metering.billing.query.*;  //TODO
 
 @Aggregate
 @Data
