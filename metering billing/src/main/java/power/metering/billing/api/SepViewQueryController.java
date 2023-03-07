@@ -87,11 +87,6 @@ public class SepViewQueryController {
                 .of("/seps/" + resource.getId() + "/calculate")
                 .withRel("calculate")
         );
-        model.add(
-            Link
-                .of("/seps/" + resource.getId() + "/createmeasure")
-                .withRel("createmeasure")
-        );
 
         model.add(
             Link.of("/seps/" + resource.getId() + "/events").withRel("events")

@@ -42,9 +42,12 @@ public class SepAggregate {
     }
 
     @CommandHandler
-    public void handle(CreateMeasureCommand command) {
+    public SepAggregate(CreateMeasureCommand command) {
         MeasureCreatedEvent event = new MeasureCreatedEvent();
         BeanUtils.copyProperties(command, event);
+
+        //TODO: check key generation is properly done
+        if (event.getId() == null) event.setId(createUUID());
 
         apply(event);
     }
@@ -66,6 +69,7 @@ public class SepAggregate {
 
     @EventSourcingHandler
     public void on(MeasureCreatedEvent event) {
+        BeanUtils.copyProperties(event, this);
         //TODO: business logic here
 
     }
