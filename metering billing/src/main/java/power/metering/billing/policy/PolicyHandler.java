@@ -1,8 +1,12 @@
 package power.metering.billing.policy;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.config.ProcessingGroup;
@@ -31,6 +35,11 @@ public class PolicyHandler {
         System.out.println(powerGenerated.toString());
 
         CalculateCommand command = new CalculateCommand();
+        Long ts = powerGenerated.getTimestamp();
+        LocalDateTime ldt = LocalDateTime.now();
+        String measureId = DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(ldt);
+        command.setId(measureId);
+
         //TODO: mapping attributes (anti-corruption)
         commandGateway.send(command);
     }

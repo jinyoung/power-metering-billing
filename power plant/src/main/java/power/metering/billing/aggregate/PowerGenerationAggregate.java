@@ -13,7 +13,7 @@ import org.axonframework.spring.stereotype.Aggregate;
 import org.springframework.beans.BeanUtils;
 import power.metering.billing.command.*;
 import power.metering.billing.event.*;
-import power.metering.billing.query.*;
+//import power.metering.billing.query.*; //TODO
 
 @Aggregate
 @Data
@@ -36,7 +36,7 @@ public class PowerGenerationAggregate {
         BeanUtils.copyProperties(command, event);
 
         //TODO: check key generation is properly done
-        if (event.getTimestamp() == null) event.setTimestamp(createUUID());
+        if (event.getTimestamp() == null) event.setTimestamp(System.currentTimeMillis());
 
         apply(event);
     }

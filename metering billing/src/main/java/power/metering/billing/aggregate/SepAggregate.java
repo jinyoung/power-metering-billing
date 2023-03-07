@@ -33,6 +33,15 @@ public class SepAggregate {
 
     public SepAggregate() {}
 
+
+    @CommandHandler
+    public SepAggregate(CalculateCommand command) {
+        MeasureCalculatedEvent event = new MeasureCalculatedEvent();
+        BeanUtils.copyProperties(command, event);
+
+        apply(event);
+    }
+
     @CommandHandler
     public void handle(CalculateCommand command) {
         MeasureCalculatedEvent event = new MeasureCalculatedEvent();
@@ -53,7 +62,7 @@ public class SepAggregate {
     @EventSourcingHandler
     public void on(MeasureCalculatedEvent event) {
         //TODO: business logic here
-
+        
     }
     //>>> EDA / Event Sourcing
 
