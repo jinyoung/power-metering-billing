@@ -11,8 +11,4 @@ public class CreateMeasureCommand {
 
     @TargetAggregateIdentifier
     private String id;
-
-    private String subscriberId;
-    private String plantId;
-    private String generatorType;
 }

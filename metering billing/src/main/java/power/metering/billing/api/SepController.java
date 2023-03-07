@@ -58,12 +58,10 @@ public class SepController {
         method = RequestMethod.PUT,
         produces = "application/json;charset=UTF-8"
     )
-    public CompletableFuture createMeasure(
-        @PathVariable("id") String id,
-        @RequestBody CreateMeasureCommand createMeasureCommand
-    ) throws Exception {
+    public CompletableFuture createMeasure(@PathVariable("id") String id)
+        throws Exception {
         System.out.println("##### /sep/createMeasure  called #####");
-
+        CreateMeasureCommand createMeasureCommand = new CreateMeasureCommand();
         createMeasureCommand.setId(id);
         // send command
         return commandGateway.send(createMeasureCommand);

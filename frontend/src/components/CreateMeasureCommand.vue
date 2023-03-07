@@ -6,9 +6,6 @@
         </v-card-title>
 
         <v-card-text>
-            <String label="SubscriberId" v-model="value.subscriberId" :editMode="editMode"/>
-            <String label="PlantId" v-model="value.plantId" :editMode="editMode"/>
-            <String label="GeneratorType" v-model="value.generatorType" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>
@@ -44,9 +41,6 @@
             value: {},
         }),
         created() {
-            this.value.subscriberId = '';
-            this.value.plantId = '';
-            this.value.generatorType = '';
         },
         watch: {
         },
