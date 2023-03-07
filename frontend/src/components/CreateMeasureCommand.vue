@@ -2,14 +2,13 @@
 
     <v-card outlined>
         <v-card-title>
-            Calculate
+            CreateMeasure
         </v-card-title>
 
         <v-card-text>
             <String label="SubscriberId" v-model="value.subscriberId" :editMode="editMode"/>
             <String label="PlantId" v-model="value.plantId" :editMode="editMode"/>
             <String label="GeneratorType" v-model="value.generatorType" :editMode="editMode"/>
-            <Number label="GeneratedAmount" v-model="value.generatedAmount" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>
@@ -17,9 +16,9 @@
             <v-btn
                     color="deep-purple lighten-2"
                     text
-                    @click="calculate"
+                    @click="createMeasure"
             >
-                Calculate
+                CreateMeasure
             </v-btn>
             
             <v-btn
@@ -37,7 +36,7 @@
 <script>
    
     export default {
-        name: 'CalculateCommand',
+        name: 'CreateMeasureCommand',
         components:{},
         props: {},
         data: () => ({
@@ -48,13 +47,12 @@
             this.value.subscriberId = '';
             this.value.plantId = '';
             this.value.generatorType = '';
-            this.value.generatedAmount = 0;
         },
         watch: {
         },
         methods: {
-            calculate() {
-                this.$emit('calculate', this.value);
+            createMeasure() {
+                this.$emit('createMeasure', this.value);
             },
             close() {
                 this.$emit('closeDialog');

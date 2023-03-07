@@ -5,7 +5,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class MeasureCalculatedEvent {
+public class MeasureAddedEvent {
 
     private String id;
     private String yearCode;

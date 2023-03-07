@@ -7,7 +7,7 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 @ToString
 @Data
-public class CalculateCommand {
+public class CreateMeasureCommand {
 
     @TargetAggregateIdentifier
     private String id;
@@ -15,5 +15,4 @@ public class CalculateCommand {
     private String subscriberId;
     private String plantId;
     private String generatorType;
-    private Double generatedAmount;
 }

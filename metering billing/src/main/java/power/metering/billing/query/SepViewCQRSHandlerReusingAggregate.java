@@ -40,7 +40,32 @@ public class SepViewCQRSHandlerReusingAggregate {
     }
 
     @EventHandler
-    public void whenMeasureCalculated_then_UPDATE(MeasureCalculatedEvent event)
+    public void whenMeasureAdded_then_UPDATE(MeasureAddedEvent event)
+        throws Exception {
+        repository
+            .findById(event.getId())
+            .ifPresent(entity -> {
+                SepAggregate aggregate = new SepAggregate();
+
+                BeanUtils.copyProperties(entity, aggregate);
+                aggregate.on(event);
+                BeanUtils.copyProperties(aggregate, entity);
+
+                repository.save(entity);
+
+                //<<< Etc / RSocket
+                queryUpdateEmitter.emit(
+                    SepViewSingleQuery.class,
+                    query -> query.getId().equals(event.getId()),
+                    entity
+                );
+                //>>> Etc / RSocket
+
+            });
+    }
+
+    @EventHandler
+    public void whenMeasureCreated_then_UPDATE(MeasureCreatedEvent event)
         throws Exception {
         repository
             .findById(event.getId())

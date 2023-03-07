@@ -53,6 +53,22 @@ public class SepController {
         return commandGateway.send(calculateCommand);
     }
 
+    @RequestMapping(
+        value = "/seps/{id}/createmeasure",
+        method = RequestMethod.PUT,
+        produces = "application/json;charset=UTF-8"
+    )
+    public CompletableFuture createMeasure(
+        @PathVariable("id") String id,
+        @RequestBody CreateMeasureCommand createMeasureCommand
+    ) throws Exception {
+        System.out.println("##### /sep/createMeasure  called #####");
+
+        createMeasureCommand.setId(id);
+        // send command
+        return commandGateway.send(createMeasureCommand);
+    }
+
     @Autowired
     EventStore eventStore;
 
@@ -75,6 +91,12 @@ public class SepController {
             Link
                 .of("/seps/" + resource.getId() + "/calculate")
                 .withRel("calculate")
+        );
+
+        model.add(
+            Link
+                .of("/seps/" + resource.getId() + "/createmeasure")
+                .withRel("createmeasure")
         );
 
         model.add(
