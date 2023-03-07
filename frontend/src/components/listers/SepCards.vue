@@ -3,6 +3,7 @@
 
 
 
+            <SepViewQuery @search="search"></SepViewQuery>
 
 
         <h1 style = "margin-left:4.5%; margin-top:-10px;">Sep</h1>
