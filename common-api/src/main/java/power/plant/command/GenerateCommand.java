@@ -13,4 +13,6 @@ public class GenerateCommand {
     private String id;
 
     private Double generatedAmount;
+    private Double hourCode;
+    private Double marketPrice;
 }

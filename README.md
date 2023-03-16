@@ -49,8 +49,8 @@ Head to http://localhost:8088 with a web browser
 ```
  http :8081/powerGenerations id="230317-nb" subscriberId="subscriberId" plantId="plantId"  
 
- http PUT :8081/powerGenerations/230317-nb/generate generatedAmount=100
- http PUT :8081/powerGenerations/230317-nb/generate generatedAmount=100
+ http PUT :8081/powerGenerations/230317-nb/generate generatedAmount=100 hourCode=1 marketPrice=10
+ http PUT :8081/powerGenerations/230317-nb/generate generatedAmount=100 hourCode=2 marketPrice=15
 
  http :8081/powerGenerations/230317-nb   # generated amount must be 200
  
