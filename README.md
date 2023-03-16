@@ -47,11 +47,17 @@ Head to http://localhost:8088 with a web browser
 ## Test Rest APIs
 - power plant
 ```
- http :8088/powerGenerations id="id" subscriberId="subscriberId" plantId="plantId" generatedAmount="generatedAmount" generatorType="generatorType" 
+ http :8081/powerGenerations id="230317-nb" subscriberId="subscriberId" plantId="plantId"  
+
+ http PUT :8081/powerGenerations/230317-nb/generate generatedAmount=100
+ http PUT :8081/powerGenerations/230317-nb/generate generatedAmount=100
+
+ http :8081/powerGenerations/230317-nb   # generated amount must be 200
+ 
 ```
 - metering billing
 ```
- http :8088/meterings id="id" yearCode="yearCode" monthCode="monthCode" dayCode="dayCode" subscriberId="subscriberId" platId="platId" generationAmount="generationAmount" SEP="SEP" 
+ http :8082/meterings
 ```
 
 ## Test RSocket APIs

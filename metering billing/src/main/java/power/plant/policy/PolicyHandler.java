@@ -35,7 +35,7 @@ public class PolicyHandler {
 
         CalculateCommand command = new CalculateCommand();
 
-        command.setId(powerGenerated.getId());
+        command.setId("meter-" + powerGenerated.getId());
     }
 
     @EventHandler
@@ -47,7 +47,7 @@ public class PolicyHandler {
         command.setGenerationAmount(입찰됨.getGeneratedAmount());
         command.setPlatId(입찰됨.getPlantId());
 
-        command.setId(입찰됨.getId());
+        command.setId("meter-" + 입찰됨.getId());
         //TODO: mapping attributes (anti-corruption)
         commandGateway.send(command);
     }

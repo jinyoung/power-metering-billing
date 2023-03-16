@@ -18,20 +18,12 @@ import power.plant.query.*;
 @Aggregate
 @Data
 @ToString
-public class MeteringAggregate {
+public class 수력MeteringAggregate extends MeteringAggregate{
 
-    @AggregateIdentifier
-    private String id;
+   
+    private Double 수력관련속성;
 
-    private String yearCode;
-    private String monthCode;
-    private String dayCode;
-    private String subscriberId;
-    private String platId;
-    private Double generationAmount;
-    private Double sep;
-
-    public MeteringAggregate() {}
+    public 수력MeteringAggregate() {}
 
 
 
@@ -46,20 +38,16 @@ public class MeteringAggregate {
         apply(event);
     }
 
-    @CommandHandler
-    public MeteringAggregate(CreateMeterCommand command) {
+    @CommandHandler()
+    public 수력MeteringAggregate(CreateMeterCommand command) {
+        if(!getClass().getSimpleName().equals(command.getGeneratorType()) return;
+
         MeterCreatedEvent event = new MeterCreatedEvent();
         BeanUtils.copyProperties(command, event);
-
-        //TODO: check key generation is properly done
-        if (event.getId() == null) event.setId(createUUID());
 
         apply(event);
     }
 
-    private String createUUID() {
-        return UUID.randomUUID().toString();
-    }
 
     @EventSourcingHandler
     public void on(CalculatedEvent event) {
@@ -67,9 +55,4 @@ public class MeteringAggregate {
         
     }
 
-    @EventSourcingHandler
-    public void on(MeterCreatedEvent event) {
-        BeanUtils.copyProperties(event, this);
-
-    }
 }
