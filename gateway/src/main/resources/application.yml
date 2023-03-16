@@ -21,7 +21,7 @@ spring:
         - id: metering billing
           uri: http://localhost:8082
           predicates:
-            - Path=/seps/**, 
+            - Path=/meterings/**, 
         - id: metering billing_websocket
           uri: http://localhost:7082
           predicates:
@@ -59,7 +59,7 @@ spring:
         - id: metering billing
           uri: http://meteringBilling:8080
           predicates:
-            - Path=/seps/**, 
+            - Path=/meterings/**, 
         - id: frontend
           uri: http://frontend:8080
           predicates:

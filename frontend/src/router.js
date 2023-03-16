@@ -8,8 +8,8 @@ Vue.use(Router);
 import PowerGenerationManager from "./components/listers/PowerGenerationCards"
 import PowerGenerationDetail from "./components/listers/PowerGenerationDetail"
 
-import SepManager from "./components/listers/SepCards"
-import SepDetail from "./components/listers/SepDetail"
+import MeteringManager from "./components/listers/MeteringCards"
+import MeteringDetail from "./components/listers/MeteringDetail"
 
 
 export default new Router({
@@ -28,14 +28,14 @@ export default new Router({
             },
 
             {
-                path: '/seps',
-                name: 'SepManager',
-                component: SepManager
+                path: '/meterings',
+                name: 'MeteringManager',
+                component: MeteringManager
             },
             {
-                path: '/seps/:id',
-                name: 'SepDetail',
-                component: SepDetail
+                path: '/meterings/:id',
+                name: 'MeteringDetail',
+                component: MeteringDetail
             },
 
 

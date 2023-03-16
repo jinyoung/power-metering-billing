@@ -19,7 +19,7 @@
                         >
                             <div style="line-height:100%;">≡</div>
                         </v-app-bar-nav-icon>
-                        power metering billing
+                        power plant
                     </span>
                 </v-toolbar-title>
                 <span v-if="urlPath!=null" 
@@ -52,13 +52,13 @@
 
                     <v-list-item
                         class="px-2"
-                        key="seps"
-                        to="/seps"
+                        key="meterings"
+                        to="/meterings"
                         @click="changeUrl()"
                         color="deep-purple lighten-2"
                         style="font-weight:700;"
                     >
-                        Sep
+                        Metering
                     </v-list-item>
 
 
@@ -132,16 +132,16 @@
                                             class="mx-auto"
                                             outlined
                                             rounded
-                                            key="seps"
-                                            to="/seps"
+                                            key="meterings"
+                                            to="/meterings"
                                             @click="changeUrl()"
                                             color="deep-purple lighten-2"
                                             style="font-weight:500; font-size:20px; padding:15px; border:solid 2px; max-width:250px; overflow:hidden"
                                         >
-                                            Sep
+                                            Metering
                                         </v-btn>
                                     </template>
-                                    <span>Sep</span>
+                                    <span>Metering</span>
                                 </v-tooltip>
                             </v-card-actions>
                         </v-card>
