@@ -62,27 +62,27 @@ public class PowerGenerationViewCQRSHandlerReusingAggregate {
             });
     }
 
-    @EventHandler
-    public void when급전지시됨_then_UPDATE(급전지시됨Event event)
-        throws Exception {
-        repository
-            .findById(event.getId())
-            .ifPresent(entity -> {
-                PowerGenerationAggregate aggregate = new PowerGenerationAggregate();
+    // @EventHandler
+    // public void when급전지시됨_then_UPDATE(급전지시됨Event event)
+    //     throws Exception {
+    //     repository
+    //         .findById(event.getId())
+    //         .ifPresent(entity -> {
+    //             PowerGenerationAggregate aggregate = new PowerGenerationAggregate();
 
-                BeanUtils.copyProperties(entity, aggregate);
-                aggregate.on(event);
-                BeanUtils.copyProperties(aggregate, entity);
+    //             BeanUtils.copyProperties(entity, aggregate);
+    //             aggregate.on(event);
+    //             BeanUtils.copyProperties(aggregate, entity);
 
-                repository.save(entity);
+    //             repository.save(entity);
 
-                queryUpdateEmitter.emit(
-                    PowerGenerationViewSingleQuery.class,
-                    query -> query.getId().equals(event.getId()),
-                    entity
-                );
-            });
-    }
+    //             queryUpdateEmitter.emit(
+    //                 PowerGenerationViewSingleQuery.class,
+    //                 query -> query.getId().equals(event.getId()),
+    //                 entity
+    //             );
+    //         });
+    // }
 
     @EventHandler
     public void when입찰됨_then_CREATE(입찰됨Event event) throws Exception {
