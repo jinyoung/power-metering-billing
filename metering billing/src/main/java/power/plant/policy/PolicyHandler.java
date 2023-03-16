@@ -38,8 +38,5 @@ public class PolicyHandler {
         LocalDateTime ldt = LocalDateTime.now();
         String measureId = DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(ldt);
         command.setId(measureId);
-
-        //TODO: mapping attributes (anti-corruption)
-        commandGateway.send(command);
     }
 }

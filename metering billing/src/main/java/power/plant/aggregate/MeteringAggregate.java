@@ -34,13 +34,6 @@ public class MeteringAggregate {
     public MeteringAggregate() {}
 
 
-    @CommandHandler
-    public SepAggregate(CalculateCommand command) {
-        MeasureCalculatedEvent event = new MeasureCalculatedEvent();
-        BeanUtils.copyProperties(command, event);
-
-        apply(event);
-    }
 
     @CommandHandler
     public void handle(CalculateCommand command) {
