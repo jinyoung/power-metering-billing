@@ -2,6 +2,7 @@ package power.plant.aggregate;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import lombok.Data;
@@ -31,6 +32,8 @@ public class MeteringAggregate {
     private Double generationAmount;
     private Double mep;
 
+    private List<시간별측정> 시간별측정량;
+
     public MeteringAggregate() {}
 
 
@@ -38,12 +41,20 @@ public class MeteringAggregate {
     @CommandHandler
     public void handle(CalculateCommand command) {
 
-        //command.getGeneratorType()
-
         CalculatedEvent event = new CalculatedEvent();
         BeanUtils.copyProperties(command, event);
 
         apply(event);
+    }
+
+    protected Double calculateMEP() {
+
+        Double mep = get시간별측정량()
+            .stream()
+            .map(측정량 -> 측정량.marketPrice * 측정량.power)
+            .reduce(0.0, (합계, 개별) -> 합계 + 개별);
+
+        return mep;
     }
 
     @CommandHandler
@@ -63,13 +74,19 @@ public class MeteringAggregate {
 
     @EventSourcingHandler
     public void on(CalculatedEvent event) {
-        //TODO: business logic here
+        시간별측정 측정치 = new 시간별측정();
+        측정치.setHourCode(event.getHourCode());
+        측정치.setPower(event.getGenerationAmount());
+        get시간별측정량().add(측정치);
+
+        setGenerationAmount(calculateMEP());
         
     }
 
     @EventSourcingHandler
     public void on(MeterCreatedEvent event) {
         BeanUtils.copyProperties(event, this);
+        set시간별측정량(new ArrayList<시간별측정>());
 
     }
 }

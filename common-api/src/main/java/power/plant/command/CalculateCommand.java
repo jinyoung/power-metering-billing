@@ -16,4 +16,5 @@ public class CalculateCommand {
     private String plantId;
     private String generatorType;
     private Double generatedAmount;
+    private Long hourCode;
 }

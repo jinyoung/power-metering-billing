@@ -25,29 +25,21 @@ public class 수력MeteringAggregate extends MeteringAggregate{
 
     public 수력MeteringAggregate() {}
 
-
-
-    @CommandHandler
-    public void handle(CalculateCommand command) {
-
-        //command.getGeneratorType()
-
-        CalculatedEvent event = new CalculatedEvent();
-        BeanUtils.copyProperties(command, event);
-
-        apply(event);
-    }
-
     @CommandHandler
     public 수력MeteringAggregate(수력CreateMeterCommand command) {
         super(command);
     }
 
+    @Override
+    protected Double calculateMEP() {
 
-    @EventSourcingHandler
-    public void on(CalculatedEvent event) {
-        //TODO: business logic here
-        
+        Double mep = get시간별측정량()
+            .stream()
+            .map(측정량 -> 측정량.marketPrice * 측정량.power)
+            .reduce(0.0, (합계, 개별) -> 합계 + 개별);
+
+        return mep + 10;
     }
+
 
 }

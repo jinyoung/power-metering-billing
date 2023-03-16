@@ -11,6 +11,7 @@ public class CalculatedEvent {
     private String yearCode;
     private String monthCode;
     private String dayCode;
+    private Long hourCode;
     private String subscriberId;
     private String platId;
     private Double generationAmount;
