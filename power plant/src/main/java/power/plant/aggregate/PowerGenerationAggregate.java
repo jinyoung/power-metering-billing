@@ -67,7 +67,7 @@ public class PowerGenerationAggregate {
 
     @EventSourcingHandler
     public void on(입찰됨Event event) {
-        BeanUtils.copyProperties(event, this);
+       // BeanUtils.copyProperties(event, this);
         //TODO: business logic here
 
     }
