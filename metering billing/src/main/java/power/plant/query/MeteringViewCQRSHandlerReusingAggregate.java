@@ -45,6 +45,7 @@ public class MeteringViewCQRSHandlerReusingAggregate {
                 MeteringAggregate aggregate = new MeteringAggregate();
 
                 BeanUtils.copyProperties(entity, aggregate);
+                aggregate.set시간별측정량(new ArrayList<>());
                 aggregate.on(event);
                 BeanUtils.copyProperties(aggregate, entity);
 

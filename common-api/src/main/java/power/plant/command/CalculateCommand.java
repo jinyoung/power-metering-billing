@@ -15,6 +15,7 @@ public class CalculateCommand {
     private String subscriberId;
     private String plantId;
     private String generatorType;
+    private Double marketPrice;
     private Double generatedAmount;
     private Long hourCode;
 }

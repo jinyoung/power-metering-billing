@@ -21,7 +21,7 @@ import power.plant.query.*;
 public class 수력MeteringAggregate extends MeteringAggregate{
 
    
-    private Double 수력관련속성;
+    private Double 수력관련속성 = 0.5;
 
     public 수력MeteringAggregate() {}
 
@@ -35,10 +35,10 @@ public class 수력MeteringAggregate extends MeteringAggregate{
 
         Double mep = get시간별측정량()
             .stream()
-            .map(측정량 -> 측정량.marketPrice * 측정량.power)
-            .reduce(0.0, (합계, 개별) -> 합계 + 개별);
+            .map(측정량 -> 측정량.marketPrice * 측정량.power * 수력관련속성)
+            .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
 
-        return mep + 10;
+        return mep;
     }
 
 

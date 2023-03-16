@@ -43,6 +43,15 @@ public class MeteringAggregate {
 
         CalculatedEvent event = new CalculatedEvent();
         BeanUtils.copyProperties(command, event);
+        event.setGeneratedPower(command.getGeneratedAmount());
+
+        시간별측정 측정치 = new 시간별측정();
+        측정치.setHourCode(event.getHourCode());
+        측정치.setPower(event.getGeneratedPower());
+        측정치.setMarketPrice(event.getMarketPrice());
+        get시간별측정량().add(측정치);
+
+        event.setGenerationAmount(calculateMEP());
 
         apply(event);
     }
@@ -76,11 +85,12 @@ public class MeteringAggregate {
     public void on(CalculatedEvent event) {
         시간별측정 측정치 = new 시간별측정();
         측정치.setHourCode(event.getHourCode());
-        측정치.setPower(event.getGenerationAmount());
+        측정치.setPower(event.getGeneratedPower());
+        측정치.setMarketPrice(event.getMarketPrice());
         get시간별측정량().add(측정치);
 
-        setGenerationAmount(calculateMEP());
-        
+        setGenerationAmount(event.getGenerationAmount());
+
     }
 
     @EventSourcingHandler

@@ -57,8 +57,26 @@ Head to http://localhost:8088 with a web browser
 ```
 - metering billing
 ```
- http :8082/meterings
+ http :8082/meterings   # generation amount must be 2500
 ```
+
+
+- power plant 2
+```
+ http :8081/powerGenerations id="230317-yo" subscriberId="subscriberId" plantId="plantId" generatorType="수력"
+
+ http PUT :8081/powerGenerations/230317-yo/generate generatedAmount=100 hourCode=1 marketPrice=10
+ http PUT :8081/powerGenerations/230317-yo/generate generatedAmount=100 hourCode=2 marketPrice=15
+
+ http :8081/powerGenerations/230317-yo   # generated amount must be 200
+ 
+```
+- metering billing
+```
+ http :8082/meterings   # generation amount must be 2700
+```
+
+
 
 ## Test RSocket APIs
 

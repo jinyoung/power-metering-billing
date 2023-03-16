@@ -13,5 +13,5 @@ public class PowerGeneratedEvent {
     private String generatorType;
     private String plantId;
     private Long hourCode;
-    private Long marketPrice;
+    private Double marketPrice;
 }

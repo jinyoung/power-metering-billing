@@ -37,6 +37,7 @@ public class PowerGenerationAggregate {
     public void handle(GenerateCommand command) {
         PowerGeneratedEvent event = new PowerGeneratedEvent();
         BeanUtils.copyProperties(command, event);
+        event.setGeneratedAmount(command.getGeneratedAmount());
 
         apply(event);
     }

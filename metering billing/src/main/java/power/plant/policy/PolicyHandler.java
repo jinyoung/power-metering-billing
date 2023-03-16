@@ -37,6 +37,11 @@ public class PolicyHandler {
 
         command.setId("meter-" + powerGenerated.getId());
         command.setHourCode(powerGenerated.getHourCode());
+        command.setGeneratedAmount(powerGenerated.getGeneratedAmount());
+        command.setMarketPrice(powerGenerated.getMarketPrice());
+
+        commandGateway.send(command);
+
     }
 
     @EventHandler

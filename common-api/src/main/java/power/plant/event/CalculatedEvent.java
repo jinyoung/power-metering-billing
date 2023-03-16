@@ -15,5 +15,7 @@ public class CalculatedEvent {
     private String subscriberId;
     private String platId;
     private Double generationAmount;
+    private Double generatedPower;
+    private Double marketPrice;
     private Double sep;
 }
