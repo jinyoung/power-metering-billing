@@ -17,7 +17,7 @@
                         </v-list-item-title>
 
                         <v-list-item-subtitle style="font-size:25px; font-weight:700;">
-                            [ Timestamp :  {{data.timestamp }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ Id :  {{data.id }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ SubscriberId :  {{data.subscriberId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ PlantId :  {{data.plantId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ GeneratedAmount :  {{data.generatedAmount }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -103,7 +103,6 @@
             this.values = temp.data._embedded.powergenerations;
             
             this.newValue = {
-                'timestamp': 0,
                 'subscriberId': '',
                 'plantId': '',
                 'generatedAmount': 0,

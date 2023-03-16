@@ -21,7 +21,7 @@ import power.plant.query.*;
 public class PowerGenerationAggregate {
 
     @AggregateIdentifier
-    private Long timestamp;
+    private String id;
 
     private String subscriberId;
     private String plantId;
@@ -44,7 +44,7 @@ public class PowerGenerationAggregate {
         BeanUtils.copyProperties(command, event);
 
         //TODO: check key generation is properly done
-        if (event.getTimestamp() == null) event.setTimestamp(createUUID());
+        if (event.getId() == null) event.setId(createUUID());
 
         apply(event);
     }

@@ -83,7 +83,6 @@
                 me.values = temp.data._embedded.powerGenerations;
                 
                 me.newValue = {
-                    'timestamp': 0,
                     'subscriberId': '',
                     'plantId': '',
                     'generatedAmount': 0,

@@ -15,9 +15,6 @@
                             <v-list-item-title>
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                Timestamp :  {{item.timestamp }}
-                            </v-list-item-subtitle>
-                            <v-list-item-subtitle>
                                 SubscriberId :  {{item.subscriberId }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
@@ -79,7 +76,7 @@
                 var obj = {}
                 if(val != undefined) {
                     var arr = this.list[val]._links.self.href.split('/');
-                    obj['timestamp'] = arr[4]; 
+                    obj['id'] = arr[4]; 
                     
                     
                     
