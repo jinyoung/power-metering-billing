@@ -2,14 +2,10 @@
 
     <v-card outlined>
         <v-card-title>
-            Calculate
+            CreateMeter
         </v-card-title>
 
         <v-card-text>
-            <String label="SubscriberId" v-model="value.subscriberId" :editMode="editMode"/>
-            <String label="PlantId" v-model="value.plantId" :editMode="editMode"/>
-            <String label="GeneratorType" v-model="value.generatorType" :editMode="editMode"/>
-            <Number label="GeneratedAmount" v-model="value.generatedAmount" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>
@@ -17,9 +13,9 @@
             <v-btn
                     color="deep-purple lighten-2"
                     text
-                    @click="calculate"
+                    @click="createMeter"
             >
-                Calculate
+                CreateMeter
             </v-btn>
             
             <v-btn
@@ -37,7 +33,7 @@
 <script>
    
     export default {
-        name: 'CalculateCommand',
+        name: 'CreateMeterCommand',
         components:{},
         props: {},
         data: () => ({
@@ -45,16 +41,12 @@
             value: {},
         }),
         created() {
-            this.value.subscriberId = '';
-            this.value.plantId = '';
-            this.value.generatorType = '';
-            this.value.generatedAmount = 0;
         },
         watch: {
         },
         methods: {
-            calculate() {
-                this.$emit('calculate', this.value);
+            createMeter() {
+                this.$emit('createMeter', this.value);
             },
             close() {
                 this.$emit('closeDialog');

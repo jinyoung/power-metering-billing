@@ -8,7 +8,7 @@
 		<version>2.7.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>power.metering.billing</groupId>
+	<groupId>power.plant</groupId>
 	<artifactId>power-plant</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>power plant</name>
@@ -21,7 +21,7 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>power.metering.billing</groupId>
+			<groupId>power.plant</groupId>
 			<artifactId>common-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

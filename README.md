@@ -51,7 +51,7 @@ Head to http://localhost:8088 with a web browser
 ```
 - metering billing
 ```
- http :8088/seps id="id" yearCode="yearCode" monthCode="monthCode" dayCode="dayCode" subscriberId="subscriberId" platId="platId" generationAmount="generationAmount" SEP="SEP" 
+ http :8088/meterings id="id" yearCode="yearCode" monthCode="monthCode" dayCode="dayCode" subscriberId="subscriberId" platId="platId" generationAmount="generationAmount" SEP="SEP" 
 ```
 
 ## Test RSocket APIs
