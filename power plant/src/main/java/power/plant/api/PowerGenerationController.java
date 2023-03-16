@@ -37,18 +37,33 @@ public class PowerGenerationController {
         this.queryGateway = queryGateway;
     }
 
-    @RequestMapping(value = "/powerGenerations", method = RequestMethod.POST)
+    @RequestMapping(
+        value = "/powerGenerations/{id}/generate",
+        method = RequestMethod.PUT,
+        produces = "application/json;charset=UTF-8"
+    )
     public CompletableFuture generate(
+        @PathVariable("id") Long id,
         @RequestBody GenerateCommand generateCommand
     ) throws Exception {
         System.out.println("##### /powerGeneration/generate  called #####");
 
+        generateCommand.setTimestamp(id);
+        // send command
+        return commandGateway.send(generateCommand);
+    }
+
+    @RequestMapping(value = "/powerGenerations", method = RequestMethod.POST)
+    public CompletableFuture 입찰(@RequestBody 입찰Command 입찰Command)
+        throws Exception {
+        System.out.println("##### /powerGeneration/입찰  called #####");
+
         // send command
         return commandGateway
-            .send(generateCommand)
+            .send(입찰Command)
             .thenApply(id -> {
                 PowerGenerationAggregate resource = new PowerGenerationAggregate();
-                BeanUtils.copyProperties(generateCommand, resource);
+                BeanUtils.copyProperties(입찰Command, resource);
 
                 resource.setTimestamp((Long) id);
 
@@ -80,6 +95,14 @@ public class PowerGenerationController {
             Link
                 .of("/powerGenerations/" + resource.getTimestamp())
                 .withSelfRel()
+        );
+
+        model.add(
+            Link
+                .of(
+                    "/powerGenerations/" + resource.getTimestamp() + "/generate"
+                )
+                .withRel("generate")
         );
 
         model.add(

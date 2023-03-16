@@ -6,6 +6,7 @@
         </v-card-title>
 
         <v-card-text>
+            <Number label="GeneratedAmount" v-model="value.generatedAmount" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>
@@ -41,6 +42,7 @@
             value: {},
         }),
         created() {
+            this.value.generatedAmount = 0;
         },
         watch: {
         },
