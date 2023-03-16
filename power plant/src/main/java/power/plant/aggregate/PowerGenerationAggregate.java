@@ -2,7 +2,10 @@ package power.plant.aggregate;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import lombok.Data;
 import lombok.ToString;
@@ -21,7 +24,7 @@ import power.plant.query.*;
 public class PowerGenerationAggregate {
 
     @AggregateIdentifier
-    private Long timestamp;
+    private String id;
 
     private String subscriberId;
     private String plantId;
@@ -44,19 +47,21 @@ public class PowerGenerationAggregate {
         BeanUtils.copyProperties(command, event);
 
         //TODO: check key generation is properly done
-        if (event.getTimestamp() == null) event.setTimestamp(System.currentTimeMillis());
+        if (event.getId() == null) event.setId(createUUID());
 
         apply(event);
     }
 
     private String createUUID() {
-        return UUID.randomUUID().toString();
+        LocalDateTime ldt = LocalDateTime.now();
+        String measureId = DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(ldt) + "_" + getPlantId();
+
+        return measureId;
     }
 
     @EventSourcingHandler
     public void on(PowerGeneratedEvent event) {
-        //TODO: business logic here
-
+        setGeneratedAmount(getGeneratedAmount() + event.getGeneratedAmount());
     }
 
     @EventSourcingHandler
@@ -67,8 +72,7 @@ public class PowerGenerationAggregate {
 
     @EventSourcingHandler
     public void on(입찰됨Event event) {
-       // BeanUtils.copyProperties(event, this);
-        //TODO: business logic here
-
+        BeanUtils.copyProperties(event, this);
+        setGeneratedAmount(0.0);
     }
 }

@@ -66,7 +66,7 @@
             values: [],
             headers: 
                 [
-                    { text: "timestamp", value: "timestamp" },
+                    { text: "id", value: "id" },
                     { text: "subscriberId", value: "subscriberId" },
                     { text: "plantId", value: "plantId" },
                     { text: "generatedAmount", value: "generatedAmount" },
@@ -88,7 +88,6 @@
             this.values = temp.data._embedded.powergenerations;
 
             this.newValue = {
-                'timestamp': 0,
                 'subscriberId': '',
                 'plantId': '',
                 'generatedAmount': 0,

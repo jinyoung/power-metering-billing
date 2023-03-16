@@ -47,7 +47,7 @@ Head to http://localhost:8088 with a web browser
 ## Test Rest APIs
 - power plant
 ```
- http :8088/powerGenerations timestamp="timestamp" subscriberId="subscriberId" plantId="plantId" generatedAmount="generatedAmount" generatorType="generatorType" 
+ http :8088/powerGenerations id="id" subscriberId="subscriberId" plantId="plantId" generatedAmount="generatedAmount" generatorType="generatorType" 
 ```
 - metering billing
 ```

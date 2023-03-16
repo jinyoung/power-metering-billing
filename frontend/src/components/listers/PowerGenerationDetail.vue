@@ -6,9 +6,6 @@
 
         <v-card-text>
             <div>
-                <Number label="Timestamp" v-model="item.timestamp" :editMode="editMode" @change="change" />
-            </div>
-            <div>
                 <String label="SubscriberId" v-model="item.subscriberId" :editMode="editMode" @change="change" />
             </div>
             <div>

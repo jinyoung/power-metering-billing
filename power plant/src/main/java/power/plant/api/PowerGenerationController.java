@@ -43,12 +43,12 @@ public class PowerGenerationController {
         produces = "application/json;charset=UTF-8"
     )
     public CompletableFuture generate(
-        @PathVariable("id") Long id,
+        @PathVariable("id") String id,
         @RequestBody GenerateCommand generateCommand
     ) throws Exception {
         System.out.println("##### /powerGeneration/generate  called #####");
 
-        generateCommand.setTimestamp(id);
+        generateCommand.setId(id);
         // send command
         return commandGateway.send(generateCommand);
     }
@@ -65,7 +65,7 @@ public class PowerGenerationController {
                 PowerGenerationAggregate resource = new PowerGenerationAggregate();
                 BeanUtils.copyProperties(입찰Command, resource);
 
-                resource.setTimestamp((Long) id);
+                resource.setId((String) id);
 
                 return new ResponseEntity<>(hateoas(resource), HttpStatus.OK);
             });
@@ -92,22 +92,18 @@ public class PowerGenerationController {
         EntityModel<PowerGenerationAggregate> model = EntityModel.of(resource);
 
         model.add(
-            Link
-                .of("/powerGenerations/" + resource.getTimestamp())
-                .withSelfRel()
+            Link.of("/powerGenerations/" + resource.getId()).withSelfRel()
         );
 
         model.add(
             Link
-                .of(
-                    "/powerGenerations/" + resource.getTimestamp() + "/generate"
-                )
+                .of("/powerGenerations/" + resource.getId() + "/generate")
                 .withRel("generate")
         );
 
         model.add(
             Link
-                .of("/powerGenerations/" + resource.getTimestamp() + "/events")
+                .of("/powerGenerations/" + resource.getId() + "/events")
                 .withRel("events")
         );
 

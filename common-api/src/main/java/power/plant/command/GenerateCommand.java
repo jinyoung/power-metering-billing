@@ -10,7 +10,7 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 public class GenerateCommand {
 
     @TargetAggregateIdentifier
-    private Long timestamp;
+    private String id;
 
     private Double generatedAmount;
 }

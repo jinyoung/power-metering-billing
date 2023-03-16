@@ -9,7 +9,7 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 @Data
 public class 입찰Command {
 
-    private Long timestamp; // Please comment here if you want user to enter the id directly
+    private String id; // Please comment here if you want user to enter the id directly
     private String subscriberId;
     private String plantId;
     private Double generatedAmount;

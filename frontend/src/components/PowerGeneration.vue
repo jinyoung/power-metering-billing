@@ -17,7 +17,6 @@
         </v-card-title >
 
         <v-card-text>
-            <Number label="Timestamp" v-model="value.timestamp" :editMode="editMode"/>
             <String label="SubscriberId" v-model="value.subscriberId" :editMode="editMode"/>
             <String label="PlantId" v-model="value.plantId" :editMode="editMode"/>
             <Number label="GeneratedAmount" v-model="value.generatedAmount" :editMode="editMode"/>
@@ -162,7 +161,7 @@
                 let requestedMsg = 10;
 
                 // console.log("connected to rsocket"); // debug
-                const endpoint = "powerGenerations."+ me.value.timestamp +".get"
+                const endpoint = "powerGenerations."+ me.value.id +".get"
                 socket.requestStream({
                     data: {},
                     metadata: String.fromCharCode(endpoint.length) + endpoint

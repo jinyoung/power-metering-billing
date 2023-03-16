@@ -7,9 +7,9 @@ import lombok.ToString;
 @ToString
 public class PowerGeneratedEvent {
 
-    private Long timestamp;
+    private String id;
     private String subscriberId;
-    private String plantId;
     private Double generatedAmount;
     private String generatorType;
+    private String plantId;
 }
