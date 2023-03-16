@@ -34,12 +34,8 @@ public class PolicyHandler {
         System.out.println(powerGenerated.toString());
 
         CalculateCommand command = new CalculateCommand();
-        
-        Long ts = powerGenerated.getTimestamp();
-        LocalDateTime ldt = LocalDateTime.now();
-        String measureId = DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(ldt);
-        
-        command.setId(measureId);
+
+        command.setId(powerGenerated.getId());
     }
 
     @EventHandler
@@ -51,9 +47,7 @@ public class PolicyHandler {
         command.setGenerationAmount(입찰됨.getGeneratedAmount());
         command.setPlatId(입찰됨.getPlantId());
 
-        LocalDateTime ldt = LocalDateTime.now();
-        String measureId = DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(ldt);
-        command.setId(measureId);
+        command.setId(입찰됨.getId());
         //TODO: mapping attributes (anti-corruption)
         commandGateway.send(command);
     }

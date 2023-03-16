@@ -3,6 +3,7 @@
 
 
 
+            <PowerGenerationViewQuery @search="search"></PowerGenerationViewQuery>
 
 
         <h1 style = "margin-left:4.5%; margin-top:-10px;">PowerGeneration</h1>
