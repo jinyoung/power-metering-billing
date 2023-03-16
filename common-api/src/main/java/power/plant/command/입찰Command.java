@@ -7,10 +7,11 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 @ToString
 @Data
-public class GenerateCommand {
+public class 입찰Command {
 
-    @TargetAggregateIdentifier
-    private Long timestamp;
-
+    private Long timestamp; // Please comment here if you want user to enter the id directly
+    private String subscriberId;
+    private String plantId;
     private Double generatedAmount;
+    private String generatorType;
 }
