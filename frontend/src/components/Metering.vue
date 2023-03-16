@@ -23,7 +23,7 @@
             <String label="SubscriberId" v-model="value.subscriberId" :editMode="editMode"/>
             <String label="PlatId" v-model="value.platId" :editMode="editMode"/>
             <Number label="GenerationAmount" v-model="value.generationAmount" :editMode="editMode"/>
-            <Number label="Sep" v-model="value.sep" :editMode="editMode"/>
+            <Number label="Mep" v-model="value.mep" :editMode="editMode"/>
 
             <EventViewer
                 v-if="value._links && value._links.events"

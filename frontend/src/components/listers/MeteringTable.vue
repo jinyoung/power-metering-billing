@@ -73,7 +73,7 @@
                     { text: "subscriberId", value: "subscriberId" },
                     { text: "platId", value: "platId" },
                     { text: "generationAmount", value: "generationAmount" },
-                    { text: "sep", value: "sep" },
+                    { text: "mep", value: "mep" },
                 ],
             metering : [],
             newValue: {},
@@ -97,7 +97,7 @@
                 'subscriberId': '',
                 'platId': '',
                 'generationAmount': 0,
-                'sep': 0,
+                'mep': 0,
             }
         },
         methods: {

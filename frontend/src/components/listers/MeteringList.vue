@@ -27,7 +27,7 @@
                             [ SubscriberId :  {{data.subscriberId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ PlatId :  {{data.platId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ GenerationAmount :  {{data.generationAmount }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ Sep :  {{data.sep }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ Mep :  {{data.mep }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </v-list-item-subtitle>
 
                     </v-list-item-content>
@@ -115,7 +115,7 @@
                 'subscriberId': '',
                 'platId': '',
                 'generationAmount': 0,
-                'sep': 0,
+                'mep': 0,
             }
         },
         methods: {

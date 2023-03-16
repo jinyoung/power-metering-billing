@@ -24,7 +24,7 @@
                 <Number label="GenerationAmount" v-model="item.generationAmount" :editMode="editMode" @change="change" />
             </div>
             <div>
-                <Number label="Sep" v-model="item.sep" :editMode="editMode" @change="change" />
+                <Number label="Mep" v-model="item.mep" :editMode="editMode" @change="change" />
             </div>
         </v-card-text>
 

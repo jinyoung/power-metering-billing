@@ -38,14 +38,9 @@ public class 수력MeteringAggregate extends MeteringAggregate{
         apply(event);
     }
 
-    @CommandHandler()
-    public 수력MeteringAggregate(CreateMeterCommand command) {
-        if(!getClass().getSimpleName().equals(command.getGeneratorType()) return;
-
-        MeterCreatedEvent event = new MeterCreatedEvent();
-        BeanUtils.copyProperties(command, event);
-
-        apply(event);
+    @CommandHandler
+    public 수력MeteringAggregate(수력CreateMeterCommand command) {
+        super(command);
     }
 
 

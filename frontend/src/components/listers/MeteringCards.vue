@@ -90,7 +90,7 @@
                     'subscriberId': '',
                     'platId': '',
                     'generationAmount': 0,
-                    'sep': 0,
+                    'mep': 0,
                 }
             },
 
