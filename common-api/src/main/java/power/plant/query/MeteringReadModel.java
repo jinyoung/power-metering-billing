@@ -27,5 +27,5 @@ public class MeteringReadModel {
 
     private Double generationAmount;
 
-    private Double sep;
+    private Double mep;
 }

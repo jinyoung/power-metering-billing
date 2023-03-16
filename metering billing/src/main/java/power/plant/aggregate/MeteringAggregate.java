@@ -29,7 +29,7 @@ public class MeteringAggregate {
     private String subscriberId;
     private String platId;
     private Double generationAmount;
-    private Double sep;
+    private Double mep;
 
     public MeteringAggregate() {}
 

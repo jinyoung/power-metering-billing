@@ -33,7 +33,7 @@
                                 GenerationAmount :  {{item.generationAmount }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
-                                Sep :  {{item.sep }}
+                                Mep :  {{item.mep }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
 
