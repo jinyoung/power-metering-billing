@@ -2,11 +2,10 @@
 
     <v-card outlined>
         <v-card-title>
-            Generate
+            입찰
         </v-card-title>
 
         <v-card-text>
-            <Number label="GeneratedAmount" v-model="value.generatedAmount" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>
@@ -14,9 +13,9 @@
             <v-btn
                     color="deep-purple lighten-2"
                     text
-                    @click="generate"
+                    @click="입찰"
             >
-                Generate
+                입찰
             </v-btn>
             
             <v-btn
@@ -34,7 +33,7 @@
 <script>
    
     export default {
-        name: 'GenerateCommand',
+        name: '입찰Command',
         components:{},
         props: {},
         data: () => ({
@@ -42,13 +41,12 @@
             value: {},
         }),
         created() {
-            this.value.generatedAmount = 0;
         },
         watch: {
         },
         methods: {
-            generate() {
-                this.$emit('generate', this.value);
+            입찰() {
+                this.$emit('입찰', this.value);
             },
             close() {
                 this.$emit('closeDialog');

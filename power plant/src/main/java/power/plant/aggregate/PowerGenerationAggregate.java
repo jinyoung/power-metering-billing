@@ -31,8 +31,16 @@ public class PowerGenerationAggregate {
     public PowerGenerationAggregate() {}
 
     @CommandHandler
-    public PowerGenerationAggregate(GenerateCommand command) {
+    public void handle(GenerateCommand command) {
         PowerGeneratedEvent event = new PowerGeneratedEvent();
+        BeanUtils.copyProperties(command, event);
+
+        apply(event);
+    }
+
+    @CommandHandler
+    public PowerGenerationAggregate(입찰Command command) {
+        입찰됨Event event = new 입찰됨Event();
         BeanUtils.copyProperties(command, event);
 
         //TODO: check key generation is properly done
@@ -47,13 +55,19 @@ public class PowerGenerationAggregate {
 
     @EventSourcingHandler
     public void on(PowerGeneratedEvent event) {
-        BeanUtils.copyProperties(event, this);
         //TODO: business logic here
 
     }
 
     @EventSourcingHandler
     public void on(급전지시됨Event event) {
+        //TODO: business logic here
+
+    }
+
+    @EventSourcingHandler
+    public void on(입찰됨Event event) {
+        BeanUtils.copyProperties(event, this);
         //TODO: business logic here
 
     }

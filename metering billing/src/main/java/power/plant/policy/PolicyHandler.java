@@ -39,4 +39,14 @@ public class PolicyHandler {
         String measureId = DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(ldt);
         command.setId(measureId);
     }
+
+    @EventHandler
+    //@DisallowReplay
+    public void whenever입찰됨_CreateMeter(입찰됨Event 입찰됨) {
+        System.out.println(입찰됨.toString());
+
+        CreateMeterCommand command = new CreateMeterCommand();
+        //TODO: mapping attributes (anti-corruption)
+        commandGateway.send(command);
+    }
 }
