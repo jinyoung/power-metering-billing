@@ -65,7 +65,8 @@ public class MeteringAggregate {
         if(getGeneratorType()!=null)
         try{
 
-            File jarFile = new File("../version1/target/metering-billing-logic-0.0.1-SNAPSHOT.jar");
+            System.out.println(new File("..").getAbsoluteFile().getPath());
+            File jarFile = new File("version1/target/metering-billing-logic-0.0.1-SNAPSHOT.jar");
 
             if(!jarFile.exists())
                 throw new IllegalStateException("jar file is not found");

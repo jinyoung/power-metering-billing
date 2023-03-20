@@ -11,9 +11,7 @@ import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 import org.springframework.beans.BeanUtils;
-import power.plant.command.*;
-import power.plant.event.*;
-import power.plant.query.*;
+
 
 @Aggregate
 @Data
@@ -30,7 +28,7 @@ public class 수력 extends MeteringAggregate{
 
         Double mep = get시간별측정량()
             .stream()
-            .map(측정량 -> 측정량.marketPrice * 측정량.power * 수력관련속성)
+            .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
             .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
 
         return mep;
