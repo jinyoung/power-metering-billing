@@ -18,12 +18,12 @@ import power.plant.query.*;
 @Aggregate
 @Data
 @ToString
-public class 수력MeteringAggregate extends MeteringAggregate{
+public class 수력 extends MeteringAggregate{
 
    
     private Double 수력관련속성 = 0.5;
 
-    public 수력MeteringAggregate() {}
+    public 수력() {}
     
     @Override
     protected Double calculateMEP() {

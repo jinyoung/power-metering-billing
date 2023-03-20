@@ -68,9 +68,9 @@ public class MeteringAggregate {
             // Class generatorClass = classLoaderForSpecificVersion.loadClass(getGeneratorType());
             
 
-            Class generatorClass = Class.forName(getGeneratorType());
+            Class generatorClass = Class.forName("power.plant.aggregate."+ getGeneratorType());
 
-            if(!generatorClass.isAssignableFrom(MeteringAggregate.class))
+            if(!MeteringAggregate.class.isAssignableFrom(generatorClass))
                 throw new IllegalStateException(getGeneratorType() + " is not a subtype of MeteringAggregate");
 
                 

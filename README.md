@@ -73,7 +73,7 @@ Head to http://localhost:8088 with a web browser
 ```
 - metering billing
 ```
- http :8082/meterings   # generation amount must be 2700
+ http :8082/meterings   # generation amount must be 1250
 ```
 
 
