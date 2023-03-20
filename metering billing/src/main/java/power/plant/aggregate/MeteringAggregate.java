@@ -2,6 +2,9 @@ package power.plant.aggregate;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.*;
 
+import java.io.File;
+import java.net.URLClassLoader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -58,6 +61,28 @@ public class MeteringAggregate {
     }
 
     protected Double calculateMEP() {
+
+        if(getGeneratorType()!=null)
+        try{
+            // ClassLoader classLoaderForSpecificVersion = new URLClassLoader(new URL[]{new File("version1.jar").toURL()}, Thread.currentThread().getContextClassLoader());
+            // Class generatorClass = classLoaderForSpecificVersion.loadClass(getGeneratorType());
+            
+
+            Class generatorClass = Class.forName(getGeneratorType());
+
+            if(!generatorClass.isAssignableFrom(MeteringAggregate.class))
+                throw new IllegalStateException(getGeneratorType() + " is not a subtype of MeteringAggregate");
+
+                
+            MeteringAggregate generatorLogic = (MeteringAggregate) generatorClass.newInstance();
+            BeanUtils.copyProperties(this, generatorLogic);
+            
+            Double mep = generatorLogic.calculateMEP();
+
+            return mep;
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
 
         Double mep = get시간별측정량()
             .stream()
