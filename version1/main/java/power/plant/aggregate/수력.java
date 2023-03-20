@@ -21,7 +21,7 @@ import power.plant.query.*;
 public class 수력 extends MeteringAggregate{
 
    
-    private Double 수력관련속성 = 0.5;
+    private Double 수력관련속성 = 0.9;
 
     public 수력() {}
     

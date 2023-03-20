@@ -64,11 +64,17 @@ public class MeteringAggregate {
 
         if(getGeneratorType()!=null)
         try{
-            // ClassLoader classLoaderForSpecificVersion = new URLClassLoader(new URL[]{new File("version1.jar").toURL()}, Thread.currentThread().getContextClassLoader());
-            // Class generatorClass = classLoaderForSpecificVersion.loadClass(getGeneratorType());
+
+            File jarFile = new File("../version1/target/metering-billing-logic-0.0.1-SNAPSHOT.jar");
+
+            if(!jarFile.exists())
+                throw new IllegalStateException("jar file is not found");
+
+            ClassLoader classLoaderForSpecificVersion = new URLClassLoader(new URL[]{jarFile.toURL()}, Thread.currentThread().getContextClassLoader());
+            Class generatorClass = classLoaderForSpecificVersion.loadClass("power.plant.aggregate."+ getGeneratorType());
             
 
-            Class generatorClass = Class.forName("power.plant.aggregate."+ getGeneratorType());
+            //Class generatorClass = Class.forName("power.plant.aggregate."+ getGeneratorType());
 
             if(!MeteringAggregate.class.isAssignableFrom(generatorClass))
                 throw new IllegalStateException(getGeneratorType() + " is not a subtype of MeteringAggregate");
