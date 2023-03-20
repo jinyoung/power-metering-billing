@@ -8,9 +8,9 @@ import lombok.ToString;
 public class MeterCreatedEvent {
 
     private String id;
-    private String yearCode;
-    private String monthCode;
-    private String dayCode;
+    private Integer yearCode;
+    private Integer monthCode;
+    private Integer dayCode;
     private String subscriberId;
     private String platId;
     private String generatorType;

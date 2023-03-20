@@ -47,12 +47,12 @@ Head to http://localhost:8088 with a web browser
 ## Test Rest APIs
 - power plant
 ```
- http :8081/powerGenerations id="230317-nb" subscriberId="subscriberId" plantId="plantId"  
+ http :8081/powerGenerations id="2023-03-17-nb" subscriberId="subscriberId" plantId="plantId"  
 
- http PUT :8081/powerGenerations/230317-nb/generate generatedAmount=100 hourCode=1 marketPrice=10
- http PUT :8081/powerGenerations/230317-nb/generate generatedAmount=100 hourCode=2 marketPrice=15
+ http PUT :8081/powerGenerations/2023-03-17-nb/generate generatedAmount=100 hourCode=1 marketPrice=10
+ http PUT :8081/powerGenerations/2023-03-17-nb/generate generatedAmount=100 hourCode=2 marketPrice=15
 
- http :8081/powerGenerations/230317-nb   # generated amount must be 200
+ http :8081/powerGenerations/2023-03-17-nb   # generated amount must be 200
  
 ```
 - metering billing
@@ -63,12 +63,12 @@ Head to http://localhost:8088 with a web browser
 
 - power plant 2
 ```
- http :8081/powerGenerations id="230317-yo" subscriberId="subscriberId" plantId="plantId" generatorType="수력"
+ http :8081/powerGenerations id="2023-03-17-yo" subscriberId="subscriberId" plantId="plantId" generatorType="수력"
 
- http PUT :8081/powerGenerations/230317-yo/generate generatedAmount=100 hourCode=1 marketPrice=10
- http PUT :8081/powerGenerations/230317-yo/generate generatedAmount=100 hourCode=2 marketPrice=15
+ http PUT :8081/powerGenerations/2023-03-17-yo/generate generatedAmount=100 hourCode=1 marketPrice=10
+ http PUT :8081/powerGenerations/2023-03-17-yo/generate generatedAmount=100 hourCode=2 marketPrice=15
 
- http :8081/powerGenerations/230317-yo   # generated amount must be 200
+ http :8081/powerGenerations/2023-03-17-yo   # generated amount must be 200
  
 ```
 - metering billing

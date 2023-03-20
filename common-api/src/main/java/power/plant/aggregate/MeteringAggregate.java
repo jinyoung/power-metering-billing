@@ -6,7 +6,9 @@ import java.io.File;
 import java.net.URLClassLoader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.Data;
 import lombok.ToString;
@@ -27,9 +29,9 @@ public class MeteringAggregate {
     @AggregateIdentifier
     private String id;
 
-    private String yearCode;
-    private String monthCode;
-    private String dayCode;
+    private Integer yearCode;
+    private Integer monthCode;
+    private Integer dayCode;
     private String subscriberId;
     private String plantId;
     private String generatorType;
@@ -65,7 +67,16 @@ public class MeteringAggregate {
         if(getGeneratorType()!=null)
         try{
 
-            System.out.println(new File("..").getAbsoluteFile().getPath());
+            File[] dayJarFiles = new File("versions/2023/03").listFiles();
+            Optional<Integer> latestVersionBeforeDay = Arrays.asList(dayJarFiles).stream().map(file -> Integer.parseInt(file.getName()))
+                .sorted((fn1, fn2) -> fn1 - fn2).findFirst();
+
+            if(latestVersionBeforeDay.isPresent()){
+
+
+
+            }
+
             File jarFile = new File("version1/target/metering-billing-logic-0.0.1-SNAPSHOT.jar");
 
             if(!jarFile.exists())
@@ -104,8 +115,19 @@ public class MeteringAggregate {
         MeterCreatedEvent event = new MeterCreatedEvent();
         BeanUtils.copyProperties(command, event);
 
-        //TODO: check key generation is properly done
-        if (event.getId() == null) event.setId(createUUID());
+        try{
+            String[] parts = event.getId().split("-");
+            String Year = parts[1];
+            String Month = parts[2];
+            String Day = parts[3];
+
+            event.setYearCode(Integer.parseInt(Year));
+            event.setMonthCode(Integer.parseInt(Month));
+            event.setDayCode(Integer.parseInt(Day));
+        }catch(Exception e){
+            throw new IllegalArgumentException("id 형식이 잘못되었습니다 (yyyy-mm-dd-[plantId]):"+ event.getId());
+        }
+
 
         apply(event);
     }
