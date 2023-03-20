@@ -24,12 +24,7 @@ public class 수력MeteringAggregate extends MeteringAggregate{
     private Double 수력관련속성 = 0.5;
 
     public 수력MeteringAggregate() {}
-
-    @CommandHandler
-    public 수력MeteringAggregate(수력CreateMeterCommand command) {
-        super(command);
-    }
-
+    
     @Override
     protected Double calculateMEP() {
 

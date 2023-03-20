@@ -14,7 +14,8 @@ public class CreateMeterCommand {
     private String monthCode;
     private String dayCode;
     private String subscriberId;
-    private String platId;
+    private String plantId;
+    private String generatorType;
     private Double generationAmount;
     private Double mep;
 }

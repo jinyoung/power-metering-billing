@@ -13,6 +13,7 @@ public class MeterCreatedEvent {
     private String dayCode;
     private String subscriberId;
     private String platId;
+    private String generatorType;
     private Double generationAmount;
     private Double sep;
 }

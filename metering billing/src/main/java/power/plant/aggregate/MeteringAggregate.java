@@ -28,7 +28,8 @@ public class MeteringAggregate {
     private String monthCode;
     private String dayCode;
     private String subscriberId;
-    private String platId;
+    private String plantId;
+    private String generatorType;
     private Double generationAmount;
     private Double mep;
 

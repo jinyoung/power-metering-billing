@@ -49,16 +49,12 @@ public class PolicyHandler {
     public void whenever입찰됨_CreateMeter(입찰됨Event 입찰됨) {
         System.out.println(입찰됨.toString());
 
-        CreateMeterCommand command;
+        CreateMeterCommand command = new CreateMeterCommand();
         
-        if("수력".equals(입찰됨.getGeneratorType())){
-            command = new 수력CreateMeterCommand();
-        }else{
-            command = new CreateMeterCommand();
-        }
 
         command.setGenerationAmount(입찰됨.getGeneratedAmount());
-        command.setPlatId(입찰됨.getPlantId());
+        command.setGeneratorType(입찰됨.getGeneratorType());
+        command.setPlantId(입찰됨.getPlantId());
 
         command.setId("meter-" + 입찰됨.getId());
         //TODO: mapping attributes (anti-corruption)
