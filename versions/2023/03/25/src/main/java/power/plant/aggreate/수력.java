@@ -19,7 +19,7 @@ import org.springframework.beans.BeanUtils;
 public class 수력 extends MeteringAggregate{
 
    
-    private Double 수력관련속성 = 0.9;
+    private Double 수력관련속성 = 0.8;
 
     public 수력() {}
     
@@ -34,5 +34,37 @@ public class 수력 extends MeteringAggregate{
         return mep;
     }
 
+    @Override
+    protected Double calculateTPCP() {
 
+        Double mep = get시간별측정량()
+            .stream()
+            .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
+            .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
+
+        return mep;
+    }
+
+    
+    @Override
+    protected Double calculateMWP() {
+
+        Double mep = get시간별측정량()
+            .stream()
+            .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
+            .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
+
+        return mep;
+    }
+
+    @Override
+    protected Double calculateMAP() {
+
+        Double mep = get시간별측정량()
+            .stream()
+            .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
+            .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
+
+        return mep;
+    }
 }

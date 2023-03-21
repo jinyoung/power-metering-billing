@@ -67,15 +67,15 @@ public class MeteringAggregate {
         if(getGeneratorType()!=null)
         try{
 
-            File[] dayJarFiles = new File("versions/2023/03").listFiles();
-            Optional<Integer> latestVersionBeforeDay = Arrays.asList(dayJarFiles).stream().map(file -> Integer.parseInt(file.getName()))
-                .sorted((fn1, fn2) -> fn1 - fn2).findFirst();
+            // File[] dayJarFiles = new File("versions/2023/03").listFiles();
+            // Optional<Integer> latestVersionBeforeDay = Arrays.asList(dayJarFiles).stream().map(file -> Integer.parseInt(file.getName()))
+            //     .sorted((fn1, fn2) -> fn1 - fn2).findFirst();
 
-            if(latestVersionBeforeDay.isPresent()){
+            // if(latestVersionBeforeDay.isPresent()){
 
 
 
-            }
+            // }
 
             File jarFile = new File("version1/target/metering-billing-logic-0.0.1-SNAPSHOT.jar");
 
@@ -153,5 +153,42 @@ public class MeteringAggregate {
         BeanUtils.copyProperties(event, this);
         set시간별측정량(new ArrayList<시간별측정>());
 
+    }
+
+
+
+
+    @Override
+    protected Double calculateTPCP() {
+
+        Double mep = get시간별측정량()
+            .stream()
+            .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
+            .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
+
+        return mep;
+    }
+
+    
+    @Override
+    protected Double calculateMWP() {
+
+        Double mep = get시간별측정량()
+            .stream()
+            .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
+            .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
+
+        return mep;
+    }
+
+    @Override
+    protected Double calculateMAP() {
+
+        Double mep = get시간별측정량()
+            .stream()
+            .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
+            .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
+
+        return mep;
     }
 }
