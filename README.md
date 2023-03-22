@@ -47,7 +47,8 @@ Head to http://localhost:8088 with a web browser
 ## Test Rest APIs
 - power plant
 ```
- ≈ 
+http :8081/powerGenerations id="2023-03-17-nb" subscriberId="subscriberId" plantId="plantId"
+ 
 
  http PUT :8081/powerGenerations/2023-03-17-nb/generate generatedAmount=100 hourCode=1 marketPrice=10
  http PUT :8081/powerGenerations/2023-03-17-nb/generate generatedAmount=100 hourCode=2 marketPrice=15

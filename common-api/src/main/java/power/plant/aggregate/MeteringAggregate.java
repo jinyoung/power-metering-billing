@@ -77,7 +77,7 @@ public class MeteringAggregate {
 
             // }
 
-            File jarFile = new File("version1/target/metering-billing-logic-0.0.1-SNAPSHOT.jar");
+            File jarFile = new File("/workspace/power-metering-billing/version1/target/metering-billing-logic-0.0.1-SNAPSHOT.jar");
 
             if(!jarFile.exists())
                 throw new IllegalStateException("jar file is not found");
@@ -158,37 +158,37 @@ public class MeteringAggregate {
 
 
 
-    @Override
-    protected Double calculateTPCP() {
+    // @Override
+    // protected Double calculateTPCP() {
 
-        Double mep = get시간별측정량()
-            .stream()
-            .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
-            .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
+    //     Double mep = get시간별측정량()
+    //         .stream()
+    //         .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
+    //         .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
 
-        return mep;
-    }
+    //     return mep;
+    // }
 
     
-    @Override
-    protected Double calculateMWP() {
+    // @Override
+    // protected Double calculateMWP() {
 
-        Double mep = get시간별측정량()
-            .stream()
-            .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
-            .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
+    //     Double mep = get시간별측정량()
+    //         .stream()
+    //         .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
+    //         .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
 
-        return mep;
-    }
+    //     return mep;
+    // }
 
-    @Override
-    protected Double calculateMAP() {
+    // @Override
+    // protected Double calculateMAP() {
 
-        Double mep = get시간별측정량()
-            .stream()
-            .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
-            .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
+    //     Double mep = get시간별측정량()
+    //         .stream()
+    //         .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)
+    //         .reduce(0.0, (합계, 개별) -> 합계 + 개별 );
 
-        return mep;
-    }
+    //     return mep;
+    // }
 }
