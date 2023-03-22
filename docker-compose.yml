@@ -1,0 +1,36 @@
+version: '2'
+services:
+  axon-server:
+    image: axoniq/axonserver
+    ports:
+      - 8024:8024
+      - 8124:8124 
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqlpw
+
+  common-api:
+    image: adoptopenjdk/maven-openjdk11:latest
+    command: mvn install
+    working_dir: /usr/src
+    volumes:
+      - ./common-api:/usr/src
+      - ./maven-repo:/root/.m2
+
+  power-plant:
+    depends_on: 
+      - common-api
+      - mysql
+      - axon-server
+    image: adoptopenjdk/maven-openjdk11:latest
+    command: mvn spring-boot:run
+    working_dir: /usr/src
+    volumes:
+      - ./power plant:/usr/src
+      - ./maven-repo:/root/.m2
