@@ -26,6 +26,11 @@ import power.plant.query.*;
 @ToString
 public class MeteringAggregate {
 
+    static List<String> versionJarDates = new ArrayList<>();
+    static {
+        listDirectories(new File("versions"), versionJarDates);
+    }
+
     @AggregateIdentifier
     private String id;
 
@@ -67,37 +72,44 @@ public class MeteringAggregate {
         if(getGeneratorType()!=null)
         try{
 
-            // File[] dayJarFiles = new File("versions/2023/03").listFiles();
-            // Optional<Integer> latestVersionBeforeDay = Arrays.asList(dayJarFiles).stream().map(file -> Integer.parseInt(file.getName()))
-            //     .sorted((fn1, fn2) -> fn1 - fn2).findFirst();
+            String yearMonthDayCode = getYearCode() +"/" + getMonthCode() +"/" + getDayCode();
 
-            // if(latestVersionBeforeDay.isPresent()){
+            Optional<String> latestVersionBeforeDay = versionJarDates.stream()
+                .sorted((date1, date2) -> date1.compareTo(date2))
+                .filter(date -> {
+                    System.out.println(date); return date.compareTo(yearMonthDayCode) < 0;})
+                .findFirst();
 
+            System.out.println("xxx");
 
+            if(latestVersionBeforeDay.isPresent()){
 
-            // }
+                File jarFile = new File("/workspace/power-metering-billing/versions/"+ latestVersionBeforeDay  +"/target/metering-billing-logic-0.0.1-SNAPSHOT.jar");
 
-            File jarFile = new File("/workspace/power-metering-billing/version1/target/metering-billing-logic-0.0.1-SNAPSHOT.jar");
-
-            if(!jarFile.exists())
-                throw new IllegalStateException("jar file is not found");
-
-            ClassLoader classLoaderForSpecificVersion = new URLClassLoader(new URL[]{jarFile.toURL()}, Thread.currentThread().getContextClassLoader());
-            Class generatorClass = classLoaderForSpecificVersion.loadClass("power.plant.aggregate."+ getGeneratorType());
-            
-
-            //Class generatorClass = Class.forName("power.plant.aggregate."+ getGeneratorType());
-
-            if(!MeteringAggregate.class.isAssignableFrom(generatorClass))
-                throw new IllegalStateException(getGeneratorType() + " is not a subtype of MeteringAggregate");
-
+                if(!jarFile.exists())
+                    throw new IllegalStateException("jar file is not found");
+    
+                ClassLoader classLoaderForSpecificVersion = new URLClassLoader(new URL[]{jarFile.toURL()}, Thread.currentThread().getContextClassLoader());
+                Class generatorClass = classLoaderForSpecificVersion.loadClass("power.plant.aggregate."+ getGeneratorType());
                 
-            MeteringAggregate generatorLogic = (MeteringAggregate) generatorClass.newInstance();
-            BeanUtils.copyProperties(this, generatorLogic);
-            
-            Double mep = generatorLogic.calculateMEP();
+    
+                //Class generatorClass = Class.forName("power.plant.aggregate."+ getGeneratorType());
+    
+                if(!MeteringAggregate.class.isAssignableFrom(generatorClass))
+                    throw new IllegalStateException(getGeneratorType() + " is not a subtype of MeteringAggregate");
+    
+                    
+                MeteringAggregate generatorLogic = (MeteringAggregate) generatorClass.newInstance();
+                BeanUtils.copyProperties(this, generatorLogic);
+                
+                Double mep = generatorLogic.calculateMEP();
+    
+                return mep;
+    
 
-            return mep;
+            }
+
+
         }catch(Exception e){
             throw new RuntimeException(e);
         }
@@ -108,6 +120,20 @@ public class MeteringAggregate {
             .reduce(0.0, (합계, 개별) -> 합계 + 개별);
 
         return mep;
+    }
+
+    public static void listDirectories(File directory, List<String> dates) {
+        File[] files = directory.listFiles();
+        for (File file : files) {
+            if (file.isDirectory() && !"src".equals(file.getName())) {
+                String afterVersions = file.getAbsolutePath();
+                afterVersions = afterVersions.split("versions/")[1];
+                //afterVersions = afterVersions.replace("/"."");
+
+                dates.add(afterVersions);
+                listDirectories(file, dates);
+            }
+        }
     }
 
     @CommandHandler
