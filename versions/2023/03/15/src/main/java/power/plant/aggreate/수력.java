@@ -26,6 +26,8 @@ public class 수력 extends MeteringAggregate{
     @Override
     protected Double calculateMEP() {
 
+System.out.println("version 15 is used");
+
         Double mep = get시간별측정량()
             .stream()
             .map(측정량 -> 측정량.getMarketPrice() * 측정량.getPower() * 수력관련속성)

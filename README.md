@@ -78,6 +78,21 @@ http :8081/powerGenerations id="2023-03-17-nb" subscriberId="subscriberId" plant
 ```
 
 
+- power plant 3
+```
+ http :8081/powerGenerations id="2023-03-31-yo" subscriberId="subscriberId" plantId="plantId" generatorType="수력"
+
+ http PUT :8081/powerGenerations/2023-03-31-yo/generate generatedAmount=100 hourCode=1 marketPrice=10
+ http PUT :8081/powerGenerations/2023-03-31-yo/generate generatedAmount=100 hourCode=2 marketPrice=15
+
+ http :8081/powerGenerations/2023-03-31-yo   # generated amount must be 200
+ 
+```
+- metering billing
+```
+ http :8082/meterings   # generation amount must be 1250
+```
+
 
 ## Test RSocket APIs
 

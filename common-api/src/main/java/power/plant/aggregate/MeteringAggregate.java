@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import lombok.Data;
 import lombok.ToString;
 import org.axonframework.commandhandling.CommandHandler;
@@ -29,6 +31,9 @@ public class MeteringAggregate {
     static List<String> versionJarDates = new ArrayList<>();
     static {
         listDirectories(new File("versions"), versionJarDates);
+        versionJarDates = versionJarDates.stream()
+            .sorted((date1, date2) -> date2.compareTo(date1)).collect(Collectors.toList());
+
     }
 
     @AggregateIdentifier
@@ -72,19 +77,18 @@ public class MeteringAggregate {
         if(getGeneratorType()!=null)
         try{
 
-            String yearMonthDayCode = getYearCode() +"/" + getMonthCode() +"/" + getDayCode();
+            String yearMonthDayCode = getYearCode() +"/" + (getMonthCode()<10 ? "0": "") + getMonthCode() +"/" + (getDayCode()<10 ? "0": "") + getDayCode();
 
-            Optional<String> latestVersionBeforeDay = versionJarDates.stream()
-                .sorted((date1, date2) -> date1.compareTo(date2))
+            Optional<String> latestVersionBeforeDay = 
+                versionJarDates.stream()                
                 .filter(date -> {
                     System.out.println(date); return date.compareTo(yearMonthDayCode) < 0;})
                 .findFirst();
 
-            System.out.println("xxx");
-
+     
             if(latestVersionBeforeDay.isPresent()){
 
-                File jarFile = new File("/workspace/power-metering-billing/versions/"+ latestVersionBeforeDay  +"/target/metering-billing-logic-0.0.1-SNAPSHOT.jar");
+                File jarFile = new File("/workspace/power-metering-billing/versions/"+ latestVersionBeforeDay.get()  +"/target/metering-billing-logic-0.0.1-SNAPSHOT.jar");
 
                 if(!jarFile.exists())
                     throw new IllegalStateException("jar file is not found");
@@ -130,7 +134,9 @@ public class MeteringAggregate {
                 afterVersions = afterVersions.split("versions/")[1];
                 //afterVersions = afterVersions.replace("/"."");
 
-                dates.add(afterVersions);
+                if(afterVersions.length() == 10)
+                    dates.add(afterVersions);
+
                 listDirectories(file, dates);
             }
         }
