@@ -21,7 +21,11 @@ public class 수력 extends MeteringAggregate{
    
     private Double 수력관련속성 = 0.7;
 
-    public 수력() {}
+    public 수력() {
+
+        
+
+    }
     
     @Override
     protected Double calculateMEP() {
